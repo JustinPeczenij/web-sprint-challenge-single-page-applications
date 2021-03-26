@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import "../App.css";
 
-
 const StyledContainer = styled.div`
     width:50%;
     margin: auto;
@@ -15,16 +14,18 @@ const TextAlignH3 = styled.h3 `
 
 const MarginH3 = styled.h3 `
     margin:0;
-`;
+    font-weight:bold;
+    `;
 
 const MarginP = styled.p `
     margin:0;
+    font-weight:bold;
 `;
 
 const SpacingDivGray = styled.div `
     width:auto;
     padding: 2% 0 2% 2%;
-    background-color: gray;
+    background-color: lightgray;
 `;
 
 const SpacingDivWhite = styled.div `
@@ -33,7 +34,37 @@ const SpacingDivWhite = styled.div `
     background-color: white;
 `;
 
+const SpacingDivWhiteBorder = styled.div `
+    width:auto;
+    padding: 2% 0 2% 2%;
+    background-color: white;
+    border-top: 1px solid black;
+`;
+
+const OrderButton = styled.button `
+    width:70%;
+    margin:0 5%;
+    padding: 2% 0 2% 2%;
+    background-color: white;
+    border-top: 1px solid black;
+`;
+const AmountButton = styled.button `
+    width:10%;
+    margin:0 5%;
+    padding: 2% 0 2% 2%;
+    background-color: white;
+    border-top: 1px solid black;
+`;
+
 export default function Pizza(props) {
+    const { change, form } = props
+
+    const onChange = (evt) => {
+        const {name, value, type, checked} = evt.target;
+        const valueToUse = type === 'checkbox' ? checked : value;
+        change(name, valueToUse)
+    }
+
     return(
         <StyledContainer className='pizza-container'>
             <TextAlignH3>Build Your Own Pizza</TextAlignH3>
@@ -53,9 +84,9 @@ export default function Pizza(props) {
                     <label>
                         <input 
                             name='name'
-                            value='form.name'
+                            value={form.name}
                             type='text'
-                            onChange=''
+                            onChange={onChange}
                         />     
                     </label>
                 </SpacingDivWhite>
@@ -63,8 +94,8 @@ export default function Pizza(props) {
                     <MarginH3>Choose a Size</MarginH3>
                 </SpacingDivGray>
                 <SpacingDivWhite>
-                    <label>Choose a Size:
-                        <select name='size'>
+                    <label>
+                        <select name='size' onChange={onChange} value={form.size}>
                             <option value=''>Select</option>
                             <option value='small'>Small (12")</option>
                             <option value='medium'>Medium (14")</option>
@@ -81,44 +112,59 @@ export default function Pizza(props) {
                 </SpacingDivGray>
 
                 <SpacingDivWhite>
-                    <label> Chicken
+                    <label style={{margin: '5%'}}> Chicken
                         <input 
                             name='chicken'
                             type='checkbox'
-                            checked='form.chicken'
-                            onChange=''
+                            checked={form.chicken}
+                            onChange={onChange}
                         />
                     </label>
-                    <label> Pepperoni
+                    <label style={{margin: '5%'}}> Pepperoni
                         <input 
                             name='pepperoni'
                             type='checkbox'
-                            checked='form.pepperoni'
-                            onChange=''
+                            checked={form.pepperoni}
+                            onChange={onChange}
                         />
                     </label>
-                    <label> Sausage
+                    <label style={{margin: '5%'}}> Sausage
                         <input 
                             name='sausage'
                             type='checkbox'
-                            checked='form.sausage'
-                            onChange=''
+                            checked={form.sausage}
+                            onChange={onChange}
                         />
                     </label>
-                    <label> Bacon
+                    <label style={{margin: '5%'}}> Bacon
                         <input 
                             name='bacon'
                             type='checkbox'
-                            checked='form.bacon'
-                            onChange='onChange'
+                            checked={form.bacon}
+                            onChange={onChange}
                         />
                     </label>
                     <p>yup errors ehre</p>
                 </SpacingDivWhite>
                 <SpacingDivGray>
-                            text input for special instructions
-                    <button>Submit</button>
+                        <MarginP>Special Instructions?</MarginP>
                 </SpacingDivGray>
+                <SpacingDivWhite>
+                    <input 
+                        name='instructions'
+                        type='text'
+                        value={form.instructions}
+                        onChange={onChange}
+                        placeholder='Anything special you&apos;d like to add?'
+                        style={{width:'96%'}}
+                    />
+                </SpacingDivWhite>
+                <SpacingDivWhiteBorder>
+                    <div>
+                        <AmountButton>1</AmountButton>
+                        <OrderButton>Add to Order</OrderButton>
+                    </div>
+                </SpacingDivWhiteBorder>
             </form>
         </StyledContainer>
     )

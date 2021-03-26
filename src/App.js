@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { Route, Link, Switch } from 'react-router-dom';
 import Home from './Components/Home'
@@ -27,7 +27,30 @@ const StyledNavButton = styled.button`
   border: 2px solid black;
 `;
 
+const initialFormValues = {
+  name:'',
+  size:'',
+  chicken: false,
+  pepperoni: false,
+  sausage: false,
+  bacon: false,
+  instructions:''
+}
+
+const initialOrders = []
+
 const App = () => {
+
+  const [orders, setOrders] = useState(initialOrders)
+  const [form, setForm] = useState(initialFormValues)
+
+  const inputChange = (name, value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
   return (
     <div className='app'>
         <StyledHeader>
@@ -43,7 +66,7 @@ const App = () => {
         </StyledHeader>
         <Switch>
           <Route path='/pizza'>
-            <Pizza />
+            <Pizza change={inputChange} form={form}/>
           </Route>
           <Route exact path='/'>
             <Home />
