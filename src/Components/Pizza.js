@@ -57,7 +57,7 @@ const AmountSelect = styled.select `
 `;
 
 export default function Pizza(props) {
-    const { change, form, disabled, submit } = props
+    const { change, form, disabled, submit, errors } = props
 
     const onChange = (evt) => {
         const {name, value, type, checked} = evt.target;
@@ -92,8 +92,9 @@ export default function Pizza(props) {
                             value={form.name}
                             type='text'
                             onChange={onChange}
-                        />     
+                            />     
                     </label>
+                    <p>{errors.name}</p>
                 </SpacingDivWhite>
                 <SpacingDivGray>
                     <MarginH3>Choose a Size</MarginH3>
@@ -149,7 +150,6 @@ export default function Pizza(props) {
                             onChange={onChange}
                         />
                     </label>
-                    <p>yup errors ehre</p>
                 </SpacingDivWhite>
                 <SpacingDivGray>
                         <MarginP>Special Instructions?</MarginP>
@@ -172,7 +172,7 @@ export default function Pizza(props) {
                             <option value='3'>3</option>
                             <option value='4'>4</option>
                         </AmountSelect>
-                        <OrderButton >Add to Order</OrderButton>
+                        <OrderButton disabled={disabled}>Add to Order</OrderButton>
                     </div>
                 </SpacingDivWhiteBorder>
             </form>
