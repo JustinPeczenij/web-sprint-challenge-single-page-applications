@@ -2,12 +2,18 @@ import React from "react";
 import styled from 'styled-components';
 import { Route, Link, Switch } from 'react-router-dom';
 import Home from './Components/Home'
+import Pizza from './Components/Pizza'
 
 const StyledHeader = styled.header`
   display:flex;
   justify-content: space-around;
+  align-items:center;
 `;
 
+const StyledH2 = styled.h2`
+  color: red;
+  font-size:1.8rem;
+`;
 
 const StyledNav = styled.nav`
   width: 50%;
@@ -25,7 +31,7 @@ const App = () => {
   return (
     <div className='app'>
         <StyledHeader>
-          <h2>Lambda Eats</h2>
+          <StyledH2>Lambda Eats</StyledH2>
           <StyledNav>
             <Link to='/'>
               <StyledNavButton>Home</StyledNavButton>
@@ -36,8 +42,11 @@ const App = () => {
           </StyledNav>
         </StyledHeader>
         <Switch>
-          <Route>
-            <Home exact path='/'/>
+          <Route path='/pizza'>
+            <Pizza />
+          </Route>
+          <Route exact path='/'>
+            <Home />
           </Route>
         </Switch>
 
