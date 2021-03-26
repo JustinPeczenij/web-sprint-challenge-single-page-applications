@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 
 const HeroImage = styled.div`
     background-image: url('https://eskipaper.com/images/pizza-12.jpg');
@@ -28,7 +29,7 @@ const Slogan = styled.h1`
 const PizzaButton = styled.button`
     font-size:1.2rem;
     color: black;
-    padding:2% 6%;
+    padding:10% 75%;
     background-color: white;
     border: 2px solid black;
 `;
@@ -39,7 +40,9 @@ export default function Home (props) {
             <HeroImage>
                 <HeroContent>
                     <Slogan>Your favorite food, delivered while coding</Slogan>
-                    <PizzaButton>Pizza?</PizzaButton>
+                    <Link to='/pizza'>
+                        <PizzaButton>Pizza?</PizzaButton>
+                    </Link>
                 </HeroContent>
             </HeroImage>
         </div>
