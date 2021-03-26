@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { Route, Link, Switch } from 'react-router-dom';
+import axios from 'axios';
 import Home from './Components/Home'
 import Pizza from './Components/Pizza'
 
@@ -38,9 +39,11 @@ const initialFormValues = {
 }
 
 const initialOrders = []
+const initialDisabled = true;
 
 const App = () => {
 
+  const [disabled , setDisabled] = useState(initialDisabled)
   const [orders, setOrders] = useState(initialOrders)
   const [form, setForm] = useState(initialFormValues)
 
@@ -50,6 +53,30 @@ const App = () => {
       [name]: value,
     });
   };
+
+  const formSubmit = () => {
+    const newOrder= {
+      name:form.name.trim(),
+      size:form.size.trim(),
+      toppings: ['chicken', 'pepperoni', 'sausage', 'bacon'].filter(
+        (topping) => form[topping]
+      ),
+      instructions:form.instructions.trim()
+    }
+    postNewOrder(newOrder);
+  }
+
+  const postNewOrder = (newOrder) => {
+    axios.post('https://reqres.in/api/users', newOrder)
+    .then((res) => {
+      setOrders([res.data, ...orders]);
+      setForm(initialFormValues);
+      console.log(orders)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <div className='app'>
@@ -66,7 +93,7 @@ const App = () => {
         </StyledHeader>
         <Switch>
           <Route path='/pizza'>
-            <Pizza change={inputChange} form={form}/>
+            <Pizza change={inputChange} form={form} disabled={disabled} submit={formSubmit} />
           </Route>
           <Route exact path='/'>
             <Home />

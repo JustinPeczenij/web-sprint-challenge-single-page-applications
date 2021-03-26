@@ -48,7 +48,7 @@ const OrderButton = styled.button `
     background-color: white;
     border-top: 1px solid black;
 `;
-const AmountButton = styled.button `
+const AmountSelect = styled.select `
     width:10%;
     margin:0 5%;
     padding: 2% 0 2% 2%;
@@ -57,12 +57,17 @@ const AmountButton = styled.button `
 `;
 
 export default function Pizza(props) {
-    const { change, form } = props
+    const { change, form, disabled, submit } = props
 
     const onChange = (evt) => {
         const {name, value, type, checked} = evt.target;
         const valueToUse = type === 'checkbox' ? checked : value;
         change(name, valueToUse)
+    }
+
+    const onSubmit = (evt) => {
+        evt.preventDefault();
+        submit();
     }
 
     return(
@@ -76,7 +81,7 @@ export default function Pizza(props) {
             <div>
                 <h2>Build Your Own Pizza</h2>
             </div>
-            <form>
+            <form onSubmit={onSubmit}>
                 <SpacingDivGray>
                     <MarginH3>Name</MarginH3>
                 </SpacingDivGray>
@@ -161,8 +166,13 @@ export default function Pizza(props) {
                 </SpacingDivWhite>
                 <SpacingDivWhiteBorder>
                     <div>
-                        <AmountButton>1</AmountButton>
-                        <OrderButton>Add to Order</OrderButton>
+                        <AmountSelect>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                            <option value='4'>4</option>
+                        </AmountSelect>
+                        <OrderButton >Add to Order</OrderButton>
                     </div>
                 </SpacingDivWhiteBorder>
             </form>
