@@ -103,12 +103,16 @@ const App = () => {
     .then((res) => {
       setOrders([res.data, ...orders]);
       setForm(initialFormValues);
-      console.log(orders)
+      
     })
     .catch((err) => {
       console.log(err);
     })
   }
+
+  useEffect(() => {
+    console.log(orders)
+  }, [orders])
 
   return (
     <div className='app'>

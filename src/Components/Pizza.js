@@ -172,7 +172,7 @@ export default function Pizza(props) {
                             <option value='3'>3</option>
                             <option value='4'>4</option>
                         </AmountSelect>
-                        <OrderButton disabled={disabled}>Add to Order</OrderButton>
+                        <OrderButton className='submit' disabled={disabled}>Add to Order</OrderButton>
                     </div>
                 </SpacingDivWhiteBorder>
             </form>
