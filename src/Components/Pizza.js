@@ -75,7 +75,7 @@ export default function Pizza(props) {
             <TextAlignH3>Build Your Own Pizza</TextAlignH3>
             <img 
                 className='pizza-form-image'
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzn9J8vvrBUFhpSGgmCZZG4J94DasyPwxIHA&usqp=CAU'
+                src='https://images.unsplash.com/photo-1513104890138-7c749659a591?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
                 alt='pizzas-cooking'
             />
             <div>
@@ -109,7 +109,7 @@ export default function Pizza(props) {
                             <option value='extra-large'>Extra Large (18")</option>
                         </select>
                     </label>
-                    <p>yup errors ehre</p>
+                    <p>{errors.size}</p>
                 </SpacingDivWhite>
 
                 <SpacingDivGray>
